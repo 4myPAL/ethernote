@@ -1,0 +1,53 @@
+.contractHeaderContainer {
+  background: white;
+  border-right: solid 1px rgb(240,240,240);
+  padding: 40px 80px 0px 120px;
+  color: rgb(107,107,107);
+  font-size: 14px;
+  /*line-height: 34px;*/
+}
+.contractHeaderItemsContainer {
+  padding: 30px;
+  border: solid 1px rgb(226, 226, 226);
+  margin-bottom: 30px;
+}
+.contractHeaderTitleContainer {
+  color: rgb(68,68,68);
+  margin-bottom: 40px;
+  overflow: hidden;
+  background: transparent url("/img/logoHelloSign.png") no-repeat right center;
+}
+.contractHeaderTitleContainer.hellosign {
+  background: transparent url("/img/logoHelloSign.png") no-repeat right center;
+}
+.contractHeaderTitleContainer.ethereum {
+  background: transparent url("/img/logoEthereum.png") no-repeat right center;
+}
+.contractHeaderTitle {
+  font-size: 24px;
+
+}
+.divcontractHeaderDescription {
+  font-size: 14px !important;
+}
+.contractHeaderItem {
+
+}
+.contractHeaderItemTitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(68,68,68);
+  margin-bottom: 10px;
+}
+.contractHeaderItemDescription {
+  font-size: 12px;
+}
+.contractHeaderItemValueContainer {
+  background: rgb(249,249,249);
+  border: solid 1px rgb(226, 226, 226);
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px 20px 10px 20px;
+  margin-bottom: 10px;
+}

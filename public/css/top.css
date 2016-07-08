@@ -1,0 +1,8 @@
+.topBar {
+	height: 80px;
+	width: 100%;
+	background: rgb(100,32,126) url("/img/logo.png") no-repeat 120px center;
+	position: absolute;
+	left: 0;
+	top: 0;
+}

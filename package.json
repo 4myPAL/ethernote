@@ -1,0 +1,33 @@
+{
+  "name": "Ethernote",
+  "version": "1.0.0",
+  "description": "Ethernote",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~4.13.x",
+    "body-parser": "^1.12.4",
+    "fs": "latest",
+    "web3": "latest",
+    "pug": "latest",
+    "hellosign-sdk": "latest",
+    "mongodb": "latest",
+    "aws-sdk": "latest",
+    "multiparty": "latest"
+  },
+  "engines": {
+    "node": "5.10.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blocknotary/ethernote"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}

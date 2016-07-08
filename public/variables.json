@@ -1,0 +1,86 @@
+{
+	"$Currency": {
+		"type": "currency",
+		"step": 1,
+		"defaultValue": "Currency",
+		"label": "Currency"
+	},
+	"$Currency_Value": {
+		"type": "currencyValue",
+		"step": 1,
+		"defaultValue": "Value",
+		"label": "Value"
+	},
+	"$Borrowers_Last_Name": {
+		"type": "text",
+		"step": 1,
+		"defaultValue": "Borrower's Last Name",
+		"label": "Last Name"
+	},
+	"$Borrowers_First_Name": {
+		"type": "text",
+		"step": 1,
+		"defaultValue": "Borrower's First Name",
+		"label": "First Name"
+	},
+	"$Borrower_ID": {
+		"type": "text",
+		"step": 1,
+		"defaultValue": "Borrower ID",
+		"label": "Borrower ID"
+	},
+	"$Borrowers_Address": {
+		"type": "text",
+		"step": 1,
+		"defaultValue": "Borrower's Address",
+		"label": "Address"
+	},
+	"$Borrowers_Email": {
+		"type": "email",
+		"step": 1,
+		"defaultValue": "Borrower's Email",
+		"label": "Email"
+	},
+	"$Lenders_Last_Name": {
+		"type": "text",
+		"step": 2,
+		"defaultValue": "Lender's Last Name",
+		"label": "Last Name"
+	},
+	"$Lenders_First_Name": {
+		"type": "text",
+		"step": 2,
+		"defaultValue": "Lender's First Name",
+		"label": "First Name"
+	},
+	"$Lender_ID": {
+		"type": "text",
+		"step": 2,
+		"defaultValue": "Lender ID",
+		"label": "Lender ID"
+	},
+	"$Lenders_Address": {
+		"type": "text",
+		"step": 2,
+		"defaultValue": "Lender's Address",
+		"label": "Address"
+	},
+	"$Lenders_Email": {
+		"type": "email",
+		"step": 2,
+		"defaultValue": "Lender's Email",
+		"label": "Email"
+	},
+	"$Percents": {
+		"type": "percent",
+		"step": 1,
+		"defaultValue": "Percents",
+		"label": "Percents"
+	},
+	"$Date_Due": {
+		"type": "date",
+		"step": 1,
+		"defaultValue": "Date Due",
+		"label": "Date Due"
+	}
+}

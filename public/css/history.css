@@ -1,0 +1,82 @@
+.historyContainer {
+  background: white;
+  padding: 30px 40px 30px 40px;
+  color: rgb(107,107,107);
+}
+.historyOuterItem {
+  /*border-left: solid 2px rgb(226,226,226);*/
+  /*padding-bottom: 30px !important;*/
+  /*overflow: hidden;*/
+  display: table !important;
+}
+.historyItem {
+  border: solid 2px rgb(226,226,226) !important;
+  border-radius: 5px !important;
+  padding: 20px !important;
+  /*margin-left: 37px;*/
+  display: table-cell !important;
+  margin-top: 30px;
+  background: white;
+}
+.historyItem:hover,
+.historyItem:focus {
+  background: rgb(226,226,226);
+}
+.historyItem.active {
+  background: rgb(72,160,222) !important;
+  color: white !important;
+  border: solid 2px rgb(95,167,226) !important;
+}
+.historyTitle {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  margin-bottom: 20px !important;
+}
+.historyItemDate {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(143,191,231);
+}
+.historyItemTitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(68,68,68);
+}
+.historyItemTitle.active {
+  color: white !important;
+}
+.historyItemTitle.active {
+  color: white;
+}
+.historyItemDescription {
+  font-size: 12px;
+  font-weight: 400;
+}
+.historyStepContainer {
+  /*overflow: hidden;*/
+  width: 17px;
+  /*float: left;*/
+  display: table-cell;
+  padding-right: 20px;
+  vertical-align: top;
+  height: 100%;
+}
+.historyStepContainer.done {
+  background: transparent url("/img/historyDone.png") no-repeat left top;
+}
+.historyStepContainer.inProgress {
+  background: transparent url("/img/historyInProgress.png") no-repeat left top;
+}
+.historyStepContainer.notStarted {
+  background: transparent url("/img/historyNotStarted.png") no-repeat left top;
+}
+.historyLineContainer {
+  margin-top: 17px;
+  width: 7px;
+  height: 30px;
+  border-right: solid 2px rgb(226,226,226);
+}
+.historyItemBottomSpace {
+  height: 30px;
+}

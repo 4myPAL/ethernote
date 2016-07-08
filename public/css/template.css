@@ -1,0 +1,60 @@
+.templateContainer {
+  background: white;
+  border-right: solid 1px rgb(240,240,240);
+  padding: 80px 80px 60px 120px;
+  color: rgb(107,107,107);
+  font-size: 14px;
+  line-height: 34px;
+}
+.templateInnerContainer {
+  padding: 40px;
+  border-left: solid 1px rgb(240,240,240);
+  border-top: solid 1px rgb(240,240,240);
+  border-right: solid 1px rgb(240,240,240);
+}
+.templateFieldLabel {
+  font-weight: 700;
+}
+.templateHeaderTable {
+  border: none;
+  color: rgb(107,107,107);
+  font-size: 14px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+.templateHeaderContainer {
+  margin-bottom: 40px;
+  width: 100%;
+  /*display: table;*/
+}
+/*.templateHeaderContainerColumn {
+  display: table-cell;
+}*/
+.templateHeaderContainerColumn.left {
+  float: left;
+}
+.templateHeaderContainerColumn.right {
+  text-align: right;
+}
+.templateHeaderTitle {
+  font-size: 24px;
+}
+.templateStatementContainer {
+  margin-bottom: 40px;
+}
+.templateVariable {
+  padding: 3px;
+  border-radius: 2px;
+  background: rgb(237,237,237);
+  border: 1px solid rgb(231,231,231);
+  width: 30px;
+}
+.templateVariable.active {
+  padding: 5px;
+  background: rgb(209,231,247);
+  border: 1px solid rgb(139,195,234);
+}
+.bottomBar {
+  height: 60px;
+  background: rgb(100,32,126) url("/img/logo.png") no-repeat 40px center;
+}

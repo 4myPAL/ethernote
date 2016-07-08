@@ -1,0 +1,26 @@
+html{
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.hidden {
+  display: none;
+}
+table, th, td {
+   border: none;
+}
+.errorDiv {
+	background: #ff8080;
+	padding: 20px;
+	margin: 20px;
+	color: white;
+	border-radius: 5px;
+}
+.errorTitle {
+	font-size: 30px;
+	display: block;
+	padding-bottom: 10px;
+	font-weight: bold;
+}
+.errorMesssage {
+	font-size: 25px;
+}

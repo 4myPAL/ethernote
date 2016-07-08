@@ -1,0 +1,44 @@
+html
+	head
+		title Ethernote
+		link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700', rel='stylesheet', type='text/css').
+		//link(href="img/favicon.ico",rel="icon" type="image/x-icon").
+		link(rel="stylesheet",href="/libs/sweetalert/dist/sweetalert.css").
+		link(rel="stylesheet", href="/css/header.css").
+		link(rel="stylesheet", href="/css/index.css").
+		link(rel="stylesheet", href="/css/templateEditor.css").
+		link(rel="stylesheet", href="/css/history.css").
+		link(rel="stylesheet", href="/css/contractHeader.css").
+		link(rel="stylesheet", href="/css/template.css").
+		link(rel="stylesheet", href="/css/top.css")
+		script(type='text/javascript',src='/js/getQueryParamsHelper.js').
+		script(type='text/javascript',src='/js/dateTimeHelper.js').
+		script(type='text/javascript',src='/libs/jquery.min.js').
+		script(type='text/javascript',src='/libs/jquery-ui/jquery-ui.min.js').
+		link(rel="stylesheet", href="/libs/jquery-ui/jquery-ui.min.css").
+		script(type='text/javascript',src='/libs/sweetalert/dist/sweetalert.min.js').
+		script(type='text/javascript',src="/libs/zeroclipboard/dist/ZeroClipboard.js").
+		script(type='text/javascript',src='/libs/spin.min.js').
+		script(type='text/javascript',src='/js/spinnerHelper.js').
+		script(type='text/javascript',src='/libs/jspdf.min.js').
+		script(type='text/javascript',src='/libs/html2canvas.min.js').
+		script(type="text/javascript" src="/js/doc.js").
+	body.mainBody
+		if (error)
+			div.errorDiv
+				span.errorTitle= error.title
+				span.errorMessage= error.message
+		else
+			include ./top.pug
+			div.mainContainer
+				if (isSigned)
+					input(type="number" value=4).stepNum.hidden
+				else
+					input(type="number" value=3).stepNum.hidden
+				input(type="text", value=contractVariables).contractVariables.hidden
+				div.mainContainerColumn.left
+					include ./contractHeader.pug
+					include ./template.pug
+				div.mainContainerColumn.right
+					include ./history.pug
+			div#spinner

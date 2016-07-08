@@ -1,0 +1,156 @@
+#!/usr/bin/env node 
+
+var fs = require('fs');
+var crypto = require('crypto');
+var uuid = require('uuid');
+var mongodb = require('mongodb');
+
+var MongoClient = mongodb.MongoClient;
+
+var config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+
+var hellosign = require('hellosign-sdk')({key: config.helloSignKey});
+
+getUnSignedRequestsFromDB(function(err, rows) {
+	if (err) {
+		console.log(err);
+    	response.send({
+	      error : {
+	        code : 500,
+	        title : "Error",
+	        message : err.message
+	      }
+	    });
+	} else {
+		for (var i = 0; i < rows.length; i++) {
+			var row = rows[i];
+			var signatureRequestId = row.signatureRequestId;
+			checkStatusOfSigningById(signatureRequestId, function(err, isSignedFromHelloSign) {
+				if (err) {
+					console.log(err);
+			    	response.send({
+				      error : {
+				        code : 500,
+				        title : "Error",
+				        message : err.message
+				      }
+				    });	
+				} else {
+					if (isSignedFromHelloSign) {
+						getAgreementHash(signatureRequestId, function(err, agreementHash) {
+							if (err) {
+								console.log(err);
+							} else {
+								updateDocInfoInDB(signatureRequestId, agreementHash, null);
+								addAgreementHashToContract(agreementHash, function(err) {
+									console.log(err);
+								});
+							}
+						});
+					}
+				}
+			});
+		}
+	}
+});
+
+function getUnSignedRequestsFromDB(cb) {
+	MongoClient.connect(config.mongodbConnectionString, function(err, db) {
+	    if(err) {
+	    	console.log(err);
+	    	if (cb)
+	    		cb(err, null);
+	    } else {
+	    	var collection = db.collection('DocsForSigning');
+		    collection.find({"isSigned": false }, function(err, cursor) {
+			    if (err) { 
+			    	if (cb)
+    					cb(err, null);
+			    } else {
+			    	cursor.toArray(function(err, results) {
+			    		console.log(err);
+			    		if (!results) {
+				    		if (cb)
+    							cb(err, null);
+				    	} else if (results.length > 0) {
+				    		console.log(results);
+				    		if (cb)
+				    			cb(null, results);
+				    	} else {
+				    		if (cb)
+    							cb(null, null);
+				    	}
+				    	db.close();
+			    	});
+			    }
+			});
+	    }
+	});
+}
+
+function checkStatusOfSigningById(signatureRequestId, cb) {
+	hellosign.signatureRequest.get(signatureRequestId)
+	.then(function(getSRResponse){
+		console.log(getSRResponse);
+		cb(null, getSRResponse.signature_request.is_complete);
+	});
+}
+
+function updateDocInfoInDB(signatureRequestId, agreementHash, cb) {
+	MongoClient.connect(config.mongodbConnectionString, function(err, db) {
+	    if(err) {
+	    	console.log(err);
+	    	if (cb)
+	    		cb(err);
+	    } else {
+	    	var collection = db.collection('DocsForSigning');
+		    collection.update({"signatureRequestId": signatureRequestId },{"signatureRequestId": signatureRequestId, "isSigned": true, "agreementHash": agreementHash });
+	    }
+	});
+}
+
+function getAgreementHash(signatureRequestId, cb) {
+	var guidForFileName = uuid.v4();
+ 	var agreementFileName = guidForFileName + ".pdf";
+ 	
+ 	var path = "../tmp/" + agreementFileName;
+
+ 	//for test
+ 	//var path = "./tmp/" + agreementFileName;
+
+	hellosign.signatureRequest.download(signatureRequestId, {file_type: 'pdf'}, function(err, resp){
+		console.log(resp);
+	    var fileStream = fs.createWriteStream(path);
+	    resp.pipe(fileStream);
+	    fileStream.on('finish', function() {
+	    	console.log(fileStream);
+	    	console.log(fileStream.path);
+	        fileStream.close();
+	        fs.readFile(path, "base64", function (err, agreementData) {
+			    if (err) {
+			    	console.log(err);
+			    	cb(err, null);
+			    } else {
+			    	console.log(agreementData);
+				    var hash = crypto.createHmac('sha256', config.hashSalt)
+	                   	.update(agreementData)
+	                   	.digest('hex');
+
+				        fs.unlink(path, function(err) {
+				        	if (!err) {
+				        		console.log("temp agreement file successfully removed");
+				        	} else {
+				        		console.log(err);
+				        	}
+				        })
+				        
+					    cb(null, hash);
+			    }
+			});
+	    });
+	});
+}
+
+function addAgreementHashToContract(agreementHash, cb) {
+
+}
