@@ -33,8 +33,8 @@ var awsService = "s3";
 var awsS3Host = awsService + ".amazonaws.com";
 var awsS3Bucket = "videointerviews";
 var awsRegion = "us-east-1";
-var awsSecretAccessKey = "cjnWS4NVLyISIpaQItSaukM5kh9KJZZyyDZdBHWw";
-var awsAccessKeyId = "AKIAJOW4J33PFSCJWMTQ";
+var awsSecretAccessKey = "";
+var awsAccessKeyId = "";
 var awsStorageTypeId = "KNpH7ht92M"; //aws storage type
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
