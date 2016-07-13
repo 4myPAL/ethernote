@@ -1,3 +1,7 @@
+![Etherenote Logo](https://github.com/blocknotary/ethernote/raw/master/design/logo.png)
+
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
+
 ## Installation
 
 1. Download zip archive
