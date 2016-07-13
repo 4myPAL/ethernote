@@ -1,16 +1,8 @@
 module.exports = function (app) {
-  var awsS3Bucket = app.awsS3Bucket;
-  var awsS3Host = app.awsS3Host;
-  var awsRegion = app.awsRegion;
-  var awsService = app.awsService;
-  var awsSecretAccessKey = app.awsSecretAccessKey;
-  var awsAccessKeyId = app.awsAccessKeyId;
-
   var crypto = app.cryptoLib;
   var https = app.https;
   var AWS = app.AWS;
-  //var Acronis = app.Acronis;
-
+  
   var util = require('util'),
   child_process = require('child_process');
   var exec = child_process.exec;
@@ -21,14 +13,14 @@ module.exports = function (app) {
 
   function uploadTempAgreementFile (agreementBytesArray, agreementFileName, cb ) {
 
-    AWS.config.region = awsRegion;
-    AWS.config.accessKeyId = awsAccessKeyId;
-    AWS.config.secretAccessKey = awsSecretAccessKey;
+    AWS.config.region = app.config.AWS.region;
+    AWS.config.accessKeyId = app.config.AWS.accessKeyId;
+    AWS.config.secretAccessKey = app.config.AWS.secretAccessKey;
 
     var s3 = new AWS.S3();
-    var params = {Bucket: awsS3Bucket, Key: agreementFileName, Body: agreementBytesArray};
+    var params = {Bucket: app.config.AWS.bucket, Key: agreementFileName, Body: agreementBytesArray};
 
-    var pathToAgreement = "https://" + awsS3Bucket + "." + awsS3Host + "/" + agreementFileName;
+    var pathToAgreement = "https://" + app.config.AWS.bucket + "." + app.config.AWS.host + "/" + agreementFileName;
 
     s3.putObject(params, function(err, data) {
       if (err) {
@@ -46,13 +38,13 @@ module.exports = function (app) {
 
   function deleteTempAgreementFile (key, cb) {
     
-    AWS.config.region = awsRegion;
-    AWS.config.accessKeyId = awsAccessKeyId;
-    AWS.config.secretAccessKey = awsSecretAccessKey;
+    AWS.config.region = app.config.AWS.region;
+    AWS.config.accessKeyId = app.config.AWS.accessKeyId;
+    AWS.config.secretAccessKey = app.config.AWS.secretAccessKey;
 
     var s3 = new AWS.S3();
     var params = {
-      Bucket: awsS3Bucket,
+      Bucket: app.config.AWS.bucket,
       Key: key
     };
     s3.deleteObject(params, function(err, data) {

@@ -28,15 +28,6 @@ if (typeof web3 !== 'undefined') {
     web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.test));
 }
 
-
-var awsService = "s3";
-var awsS3Host = awsService + ".amazonaws.com";
-var awsS3Bucket = "videointerviews";
-var awsRegion = "us-east-1";
-var awsSecretAccessKey = "";
-var awsAccessKeyId = "";
-var awsStorageTypeId = "KNpH7ht92M"; //aws storage type
-
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 var app = express();
@@ -53,14 +44,6 @@ app.uuid = uuid;
 app.multiparty = multiparty;
 
 app.MongoClient = MongoClient;
-
-app.awsService = awsService;
-app.awsS3Host = awsS3Host;
-app.awsS3Bucket = awsS3Bucket;
-app.awsRegion = awsRegion;
-app.awsSecretAccessKey = awsSecretAccessKey;
-app.awsAccessKeyId = awsAccessKeyId;
-app.awsStorageTypeId = awsStorageTypeId;
 
 app.AWS = AWS;
 
