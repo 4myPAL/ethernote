@@ -22,6 +22,7 @@ config.json with placeholders
 ```
 {
     "environment": "live/dev",
+    "useGlobalToken": false,
     "globalToken": "globalToken_for_using_ethernote_api",
     "helloSignKey": "helloSign_key",
     "mongodbConnectionString": "mongodb://user:password@host:port/database",
