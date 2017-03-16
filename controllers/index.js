@@ -25,38 +25,40 @@ module.exports = function (app) {
 						message: err.message
 					}
 				});
-			} else {
-				//getAgreementHash(signatureRequestId, function(err, pdfHash) {
-					if (err) {
-						console.log(err);
-						response.render("doc", {
-							error: {
-								title: "Error",
-								message: err.message
-							}
-						});
-					} else {
-						var transactionId;
-						var contractVariables;
-						var contractHash;
-						var isSigned;
-						if (results.length > 0) {
-							transactionId = results[0].transactionId;
-							contractHash = results[0].contractHash;
-							contractVariables = results[0].contractVariables;
-							isSigned = results[0].isSigned;
-						}
-						response.render("doc", {
-							docId: request.params.id,
-							address: app.contractAddress,
-							pdfHash: contractHash,
-							transactionId: transactionId,
-							contractVariables: contractVariables,
-							isSigned: isSigned
-						});
-					}
-				//});
+				return;
 			}
+
+			//getAgreementHash(signatureRequestId, function(err, pdfHash) {
+			if (err) {
+				console.log(err);
+				response.render("doc", {
+					error: {
+						title: "Error",
+						message: err.message
+					}
+				});
+				return;
+			}
+			
+			var transactionId;
+			var contractVariables;
+			var contractHash;
+			var isSigned;
+			if (results.length > 0) {
+				transactionId = results[0].transactionId;
+				contractHash = results[0].contractHash;
+				contractVariables = results[0].contractVariables;
+				isSigned = results[0].isSigned;
+			}
+			response.render("doc", {
+				docId: request.params.id,
+				address: app.contractAddress,
+				pdfHash: contractHash,
+				transactionId: transactionId,
+				contractVariables: contractVariables,
+				isSigned: isSigned
+			});
+			//});
 		});
 	})
 }
