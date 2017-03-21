@@ -18,7 +18,7 @@
    
    **bucket** - AWS S3 bucket name
    
-   **region** - AWS region (Check available [AWS S3 regions](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region))
+   **region** - AWS region. For example, "us-east-1" (Check available [AWS S3 regions](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region))
    
    **secretAccessKey** - AWS secretAccessKey
    
