@@ -6,22 +6,10 @@ var contractABI = config.smartContract.abi;
 if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider);
 } else {
-  if (config.environment == "live")
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.live));
-  else if (config.environment == "dev")
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.test));
-  else
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.test));
+  web3 = new Web3(new Web3.providers.HttpProvider(config.Ethereum[config.environment].rpc));
 }
 
-var contractAddress;
-if (config.environment == "live") {
-	contractAddress = config.smartContract.contractAddress.live;
-} else if (config.environment == "dev") {
-	contractAddress = config.smartContract.contractAddress.test;
-} else {
-	contractAddress = config.smartContract.contractAddress.test;
-}
+var contractAddress = config.Ethereum.smartContract.contractAddress[config.environment];
 
 var docId = "9a3de1b41a84a8ea901a32d258339bc26177b642";
 

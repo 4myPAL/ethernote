@@ -7,7 +7,7 @@ module.exports = function (app) {
 	app.addAgreementHashToContract = addAgreementHashToContract;
 	app.getDocDataById = getDocDataById;
 
-	var contractABI = app.config.smartContract.abi;
+	var contractABI = app.config.Ethereum.smartContract.abi;
 
 	function attachToContract(cb) {
 		if(!web3.isConnected()) {

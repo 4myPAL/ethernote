@@ -1,5 +1,7 @@
 var fs = require('fs');
 
+var provider = require('./helpers/basicauthhttpprovider');
+
 var config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
 var Web3 = require('web3');
@@ -7,23 +9,18 @@ var web3;
 if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider);
 } else {
-  if (config.environment == "live")
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.live));
-  else if (config.environment == "dev")
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.test));
-  else
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.test));
+  web3 = new Web3(new Web3.providers.HttpProvider(config.Ethereum[config.environment].rpc));
 }
 
-var contractABI = config.smartContract.abi;
-var compiled = config.smartContract.bin;
+var contractABI = config.Ethereum.smartContract.abi;
+var compiled = config.Ethereum.smartContract.bin;
 
 
 //estimateGas();
 deployContract();
 
 function estimateGas() {
-	web3.eth.defaultAccount = web3.eth.accounts[1];
+	web3.eth.defaultAccount = web3.eth.accounts[0];
 	var balance = web3.eth.getBalance(web3.eth.defaultAccount);
 	console.log(balance.toString(10));
 	console.log(balance.toNumber());
@@ -46,8 +43,8 @@ function deployContract() {
 	console.log(gasWillUsed);
 	//gasWillUsed += 30000;
 
-	var phonetoaddressContract = web3.eth.contract(contractABI);
-	phonetoaddressContract.new(
+	var ethernoteContract = web3.eth.contract(contractABI);
+	ethernoteContract.new(
 	   {
 	   		data: compiled,
 	   		gas: gasWillUsed,

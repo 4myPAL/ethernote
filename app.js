@@ -9,8 +9,11 @@ var crypto = require('crypto');
 var AWS = require('aws-sdk');
 var uuid = require('uuid');
 var multiparty = require('multiparty');
+//var multer  = require('multer');
 
 var MongoClient = mongodb.MongoClient;
+
+var provider = require('./helpers/basicauthhttpprovider');
 
 var config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
@@ -20,12 +23,10 @@ var web3;
 if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider);
 } else {
-  if (config.environment == "live")
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.live));
-  else if (config.environment == "dev")
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.test));
+  if (config.Ethereum[config.environment].user && config.Ethereum[config.environment].pass)
+    web3 = new Web3(new provider(config.Ethereum[config.environment].rpc, config.Ethereum[config.environment].user, config.Ethereum[config.environment].pass));
   else
-    web3 = new Web3(new Web3.providers.HttpProvider(config.smartContract.rpc.test));
+    web3 = new Web3(new Web3.providers.HttpProvider(config.Ethereum[config.environment].rpc));
 }
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
@@ -42,21 +43,14 @@ app.crypto = crypto;
 app.hellosign = hellosign;
 app.uuid = uuid;
 app.multiparty = multiparty;
+//app.multer = multer;
 
 app.MongoClient = MongoClient;
 
 app.AWS = AWS;
 
-if (config.environment == "live") {
-  app.contractAddress = config.smartContract.contractAddress.live;
-  app.contractWallet = config.smartContract.wallet.live;
-} else if (config.environment == "dev") {
-  app.contractAddress = config.smartContract.contractAddress.test;
-  app.contractWallet = config.smartContract.wallet.test;
-} else {
-  app.contractAddress = config.smartContract.contractAddress.test;
-  app.contractWallet = config.smartContract.wallet.test;
-}
+app.contractAddress = config.Ethereum.smartContract.contractAddress[config.environment];
+app.contractWallet = config.Ethereum[config.environment].acc;
 
 function errorHandler(err, req, res, next) {
   	res.status(500);
