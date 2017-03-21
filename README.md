@@ -8,14 +8,39 @@
 2. Unpack it
 3. Go to the root folder in terminal install the dependencies `npm install`
 4. Set **environment** in web/config.json (see config.json with placeholders below): `dev` or `live`
-5. Set smart contract key points in config.json (see config.json with placeholders below):
-    * `wallet.test`, `wallet.live`
-    * `rpc.test`, `rpc.live`
-6. Go to the root folder in terminal `/` and run `node deployContract.js` to deploy your smart contract into Ethereum.
-7. After creation you will get the message in terminal like this:
+5. Set **useGlobalToken** `false`
+6. Set **helloSignKey** with your HelloSign API key. HelloSign is used to sign agreements.
+7. Set **mongodbConnectionString** with your mongoDB connection string. MongoDB is used to store logic of EtherNote application.
+8. Set **hashSalt** with string of letters and digits. It will be used as a salt for hash creating from agreement data base64 string.
+9. Set **AWS** credentials:
+
+   **host** - AWS S3 endpoint. For example, "s3.amazonaws.com".
+   
+   **bucket** - AWS S3 bucket name
+   
+   **region** - AWS region (Check available [AWS S3 regions](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region))
+   
+   **secretAccessKey** - AWS secretAccessKey
+   
+   **accessKeyId** - AWS accessKeyId
+10. Launch any Ethereum RPC client. For example, [testrpc](https://github.com/ethereumjs/testrpc)
+11. Set **Ethereum** config:
+   
+      **rpc** - Ethereum RPC client url (`http://host:port`). If client is started on the same host at default port: `http://localhost:8545`
+   
+      **user** - Ethereum RPC client url basic HTTP auth username
+   
+      **pass** - Ethereum RPC client url basic HTTP auth password
+   
+      remove **user**, **pass** parameters from config, if an access to Ethereum RPC client url is anonymous
+      
+      **acc** - Ethereum account address, where contract will be deployed
+   
+12. Go to the root folder in terminal `/` and run `node deployContract.js` to deploy your smart contract into Ethereum.
+13. After creation you will get the message in terminal like this:
     *Contract mined! address:* **0xb713e9195f44a10383015f38774f31869053750c** *transactionHash: 0x85e85f78a4e1b40f26e491eb88b9a231b31085db11799734edc54d0285edc190*
-8. Copy created smart contract address from this message and paste it to the config.json to `contractAddress.test` or `contractAddress.live` depending on your environment.
-9. Go to the root folder in terminal and start ethernote web application `node app.js`
+14. Copy created smart contract address from this message and paste it to the config.json to `contractAddress.dev` or `contractAddress.live` depending on your environment.
+15. Go to the root folder in terminal and start EtherNote web application `node app`
 
 ### 
 config.json with placeholders
